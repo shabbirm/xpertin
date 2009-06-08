@@ -1,0 +1,33 @@
+<b>From Date:</b> <%= form.text_field 'from_date', {:size => 10} %>
+<a class="calendar" id="from_date_button" href="#" onclick="return false" title="Select Date">&nbsp;</a>
+<script type="text/javascript">
+//<![CDATA[
+Calendar.setup({
+    inputField     :    "criteria_from_date",           
+    ifFormat       :    "%Y-%m-%d",
+    showsTime      :    false,
+    button         :    "from_date_button",        
+    step           :    1,
+    weekNumbers    :    false,
+    electric       : false,
+    showOthers     : true
+});
+//]]>
+</script>
+<b>To Date:</b> <%= form.text_field 'to_date', {:size => 10} %>
+<a class="calendar" id="to_date_button" href="#" onclick="return false" title="Select Date">&nbsp;</a>
+<script type="text/javascript">
+//<![CDATA[
+Calendar.setup({
+    inputField     :    "criteria_to_date",           
+    ifFormat       :    "%Y-%m-%d",
+    showsTime      :    false,
+    button         :    "to_date_button",        
+    step           :    1,
+    weekNumbers    :    false,
+    electric       : false,
+    showOthers     : true
+});
+//]]>
+</script>
+

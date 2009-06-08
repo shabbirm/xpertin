@@ -1,0 +1,91 @@
+<table class="webForm">
+<tr>
+	<th class="required"><label for="member_name">Name</label></th>
+	<td><%= form.text_field :name  %></td>
+</tr>
+<tr>
+	<th class="required"><label for="member_email">email</label></th>
+	<td><%= form.text_field :email  %></td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_address">Address</label></th>
+	<td><%= form.text_area :address, {:rows => 5, :cols => 50}  %></td>
+</tr>
+
+<tr>
+	<th valign="top" class="required"><label for="member_loginname">Login Name</label></th>
+	<td><%= form.text_field :login_name  %></td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_password">Password</label></th>
+	<td><%= form.password_field :password  %></td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_password">Confirm Password</label></th>
+	<td><%= form.password_field :password  %></td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_dob">Date of Birth</label></th>
+	<td><%= form.text_field :dob  %></td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_phone">Contact No.</label></th>
+	<td><%= form.text_field :phone  %></td>
+</tr>
+<tr>
+	<th><label for="member_country">Country</label></th>
+	<td><%= form.text_field :country  %></td>
+</tr>
+<tr>
+	<th><label for="member_state">State</label></th>
+	<td><%= form.text_field :state  %></td>
+</tr>
+
+<tr>
+	<th valign="top"><label for="client_photo">Picture</label></th>
+	<td>
+      <%= file_column_field  'member', 'photo'  %><br />
+	  <% if @member && url_for_file_column('member', 'photo') != nil %>
+	      <%= link_to 'View', url_for_file_column('member', 'photo') %>
+		  <span style="margin-left:50px;"><input id="delete_photo" type="checkbox" name="delete_photo" value="1" /> 
+		  <label for="delete_photo">Delete Picture</label></span>
+      <% end %>
+    </td>
+</tr>
+
+<tr>
+	<th valign="top"><label for="client__doc">Thumbnail</label></th>
+	<td>
+      <%= file_column_field  'member', 'thumbnail'  %><br />
+	  <% if @member && url_for_file_column('member', 'thumbnail') != nil %>
+      	<%= link_to 'View', url_for_file_column('member', 'thumbnail') %>
+	    <span style="margin-left:50px;"><input id="delete_thumbnail" type="checkbox" name="delete_thumbnail" value="1" /> <label for="delete_thumbnail">Delete Thumbnail</label></span>
+	  <% end %>
+    </td>
+</tr>
+<tr>
+	<th valign="top" class="required"><label for="member_notes">Notes</label></th>
+	<td><%= form.text_area :notes, {:rows => 15, :cols => 50}  %></td>
+</tr>
+<tr>
+	<th valign="top"><label for="client_photo">File Name</label></th>
+	<td>
+      <%= file_column_field  'member', 'docs'  %><br />
+	  <% if @member && url_for_file_column('member', 'docs') != nil %>
+	      <%= link_to 'View', url_for_file_column('member', 'docs') %>
+		  <span style="margin-left:50px;"><input id="delete_docs" type="checkbox" name="delete_docs" value="1" /> 
+		  <label for="delete_photo">Delete File</label></span>
+      <% end %>
+    </td>
+</tr>
+<tr><td></td></tr>
+<tr>
+	<th valign="top" class="required"><label for="word_verification">Word Verification:</label></th>
+<td>   Type the characters you see in the picture below. <br/><br/>
+	<%= show_simple_captcha(:label => " Letters are not case-sensitive ") %>
+</td>
+	</tr>
+<tr>
+  <td colspan="2"><%= submit_tag 'Save' %></td>
+</tr>
+</table>

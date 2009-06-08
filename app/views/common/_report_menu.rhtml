@@ -1,0 +1,18 @@
+<div id="panelReport">
+<div id="panelReportHeader" class="accordionTabTitleBar">Reports</div>
+<div id="panelReportContent" class="accordionTabContentBox">
+<ul>
+<li><%= link_to "Daily Member Registration", :controller => '', :action => '' %></li>
+<% if current_user.has_role?('administrator') %>
+
+<li><%= link_to "User Wise", :controller => '', :action => '' %></li>
+<li><%= link_to "Member wise Report", :controller => 'reports', :action => 'member_wise_report' %></li>
+<li><%= link_to "Industry wise", :controller => '', :action => '' %></li>
+<li><%= link_to "Performance/Productivity", :controller => '', :action => '' %></li>
+<li><%= link_to " Survey Report", :controller => '', :action => '' %></li>
+
+<% end %>
+</ul>
+</div>
+</div>
+

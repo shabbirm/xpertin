@@ -1,0 +1,35 @@
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+var tabIndex = 0
+<% if controller.controller_name == 'reports' %>
+	tabIndex = <%= @menu_index['reports'] %>
+<% elsif controller.controller_name == 'messages' %>
+	tabIndex = <%= @menu_index['messages'] %>
+<% elsif controller.controller_name == 'pages' ||  controller.controller_name == 'testimonials' %>
+	tabIndex = <%= @menu_index['cms'] %>
+<% elsif controller.controller_name == 'lookups' %>
+	tabIndex = <%= @menu_index['datalists'] %>
+<% elsif controller.controller_name == 'cvs' || controller.controller_name == 'folders' || controller.controller_name == 'meetings' || controller.controller_name == 'sourced_cvs' %>
+	tabIndex = <%= @menu_index['cvs'] %>
+<% elsif controller.controller_name == 'send_outs' || (controller.controller_name == 'applications' && controller.action_name == 'interviews')%>
+	tabIndex = <%= @menu_index['send_outs'] %>
+<% elsif controller.controller_name == 'invoice_requests' %>
+	tabIndex = <%= @menu_index['invoices'] %>
+<% elsif controller.controller_name == 'brief_takes' || controller.controller_name == 'jobs' || controller.controller_name =='applications' %>
+	tabIndex = <%= @menu_index['assignments'] %>
+<% elsif controller.controller_name == 'clients' || controller.controller_name == 'client_contacts' || controller.action_name == 'candidates_list' %>
+    tabIndex = <%= @menu_index['users'] %>
+<% elsif controller.controller_name == 'messages' %>
+    tabIndex = <%= @menu_index['messages'] %>
+<% elsif controller.controller_name == 'mails' %>
+    tabIndex = <%= @menu_index['emails'] %>
+<% end %>
+
+var onloads = new Array();
+function accord() { new Rico.Accordion( 'submenu', {panelHeight:280,onLoadShowTab:tabIndex} ); }
+onloads.push(accord);
+for ( var i = 0 ; i < onloads.length ; i++) {
+	onloads[i]();
+}
+//]]>
+</script>

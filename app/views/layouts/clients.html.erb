@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Xpert-In.com</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta name="author" content="Zabisco Ltd." />
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style_ie.css" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style_ie7.css" />
+<![endif]-->
+<script type="text/javascript" src="/javascripts/custom/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.core.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.sortable.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.tabs.js"></script>
+<script type="text/javascript" src="/javascripts/custom/jquery.tooltip.js"></script>
+<script type="text/javascript" src="/javascripts/custom/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.datepicker.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.slider.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.progressbar.js"></script>
+<script type="text/javascript" src="/javascripts/custom/flashobject.js"></script>
+<script type="text/javascript" src="/javascripts/custom/SelectCustomizer.js"></script>
+<script type="text/javascript" src="/javascripts/custom/jquery.bind.js"></script>
+<script type="text/javascript" src="/javascripts/custom/ui.checkbox.js"></script>
+<script type="text/javascript" src="/javascripts/custom/functions.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".btn-slide").click(function(){
+		$("#search").slideToggle("slow");
+		$(this).toggleClass("active"); return false;
+	});
+});
+</script>
+</head>
+<body id="home">
+<div class="container clearfix" id="top">
+
+	<div id="header">
+		<h1 title="Xpert-In - The right advice matters"><a href="/"><span>Xpert-In - The right advice matters</span></a></h1>
+		<div id="login">
+			<ul>
+			  <% if logged_in? %>
+				<li>Welcome, <%= current_user.login %> </li>
+				<li><a href="/help.html" title="Help">Help</a></li>
+				<li><%= link_to 'Sign Out', logout_url %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="searchPan">
+		<div id="search">
+			<form method="get" action="search">
+				<div class="search-form">
+					<input type="text" id="site-search" value=""/>
+					<input type="radio" id="searchprov" name="searchtype" /><label for="searchprov">Provider</label>
+					<input type="radio" id="searchclient" name="searchtype" /><label for="searchclient">Clients</label>
+					<input type="submit" name="submit" class="search" title="Search" value="" />
+				</div>
+				<div class="clear0">&nbsp;</div>
+			</form>
+		</div>
+		<p class="slide"><a href="#" class="btn-slide">Search</a></p>
+	</div>
+		
+    <%= yield :layout %>
+	
+    <div id="footer">
+      <ul>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Services</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+      ©Xpert-in 2009
+    </div>
+</div>
+</body>
+</html>

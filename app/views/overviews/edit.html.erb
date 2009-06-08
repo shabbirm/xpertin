@@ -1,0 +1,12 @@
+<h1>Editing overview</h1>
+
+<% form_for(@overview) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @overview %> |
+<%= link_to 'Back', overviews_path %>

@@ -1,0 +1,54 @@
+/* B:Navigation */
+div#navigation {
+	margin: 0px;
+	padding: 0px;
+	height: 40px;
+	background: #fff url("../images/tclback_40.gif") repeat-x top left;
+	color: #fff;
+	border-bottom: solid 1px #fff;
+}
+
+#navigation ul {
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+}
+	
+#navigation li {
+		margin: 0px;			/* spacing between main menu items */
+		padding: 0px 0px 0px;			/* padding within main menu items */
+		float: left;
+		/*border-right: solid 1px #fff; */
+		
+}  
+#navigation a:hover  {
+		color: #fff;
+		background: #5377A9;/* url("../images/blank.gif") repeat-x top left;  */
+}
+	
+#navigation li.on a
+{
+	color: #FFCC00;
+	background-color: #004CB2;
+	font-weight: bold;
+}
+.menu {
+		width: 135px;
+		color: #000000;
+		padding:0px;
+		font-size: 11px;
+		font-weight: bold;
+		line-height: 36px;
+		margin: 0px 0px 5px 0px;
+		background:#fff url("../images/tclback_40.gif") repeat-x top left;
+		height:36px;
+		
+}
+
+IMG.bottom { vertical-align: text-bottom }
+
+#navigation a:focus, #navigation a:active {
+        color: #fff;
+        background: #833E43;/* url("../images/blank.gif") repeat-x top left;  */
+}
+/* E:Navigation */

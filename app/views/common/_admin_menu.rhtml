@@ -1,0 +1,64 @@
+<div style="padding-left:10px;">
+	<%= link_to 'Home' , :controller => 'users', :action => 'index' %><br/>
+	<%= link_to 'Implemented List' , :controller => 'new_implementations', :action => 'index' %><br /><br />
+</div>
+<br />
+
+<div id="panelUser">
+<div id="panelUserHeader" class="accordionTabTitleBar">Users</div>
+<div id="panelUserContent" class="accordionTabContentBox">
+<ul>
+	<li>
+		<% if current_user.has_role?('administrator') %>
+           <li><%= link_to 'Administrator Users list', users_path %></li>
+         <% end %>	
+	</li>
+   	<li>Clients
+		<ul>
+		
+		</ul>
+	</li>
+</ul>
+</div>
+</div>
+
+<div id="panelDataList">
+<div id="panelDataListHeader" class="accordionTabTitleBar">Data Lists</div>
+<div id="panelDataListContent" class="accordionTabContentBox">
+<ul>
+	<li><%= link_to 'Industries' , :controller => 'industry', :action => 'index' %></li>
+	<li><%= link_to 'Job Categories' , :controller => '', :action => '' %></li>
+	<li><%= link_to 'Regions' , :controller => 'regions', :action => 'index' %></li>
+	<li><%= link_to 'Locations' , :controller => 'location', :action => 'index' %></li>
+	<li><%= link_to 'Religions' , :controller => 'religions', :action => 'index' %></li>
+	<li><%= link_to 'Skill Categories' , :controller => '', :action => '' %></li>
+	<li><%= link_to 'Skills' , :controller => '', :action => '' %></li>
+	<li><%= link_to 'Computer Skill Categories' , :controller => 'computer_skill_category', :action => 'index' %></li>
+	<li><%= link_to 'Computer Skills' , :controller => 'computer_skill', :action => 'index' %></li>
+	<li><%= link_to 'Professional Qualications' , :controller => 'professional_qualification', :action => 'index' %></li>
+</ul>
+</div>
+</div>
+
+<%= render :partial => 'common/report_menu' %>
+<%= render :partial => 'common/message_menu' %>
+
+<div id="panelCMS">
+<div id="panelCMSHeader" class="accordionTabTitleBar">Content Management</div>
+<div id="panelCMSContent" class="accordionTabContentBox">
+<ul>
+<li><%= link_to "Content Pages", :controller => 'pages', :action => 'index' %></li>
+<li><%= link_to "Testimonials", :controller => '', :action => '' %></li>
+</ul>
+</div>
+</div>
+
+<%= render :partial => 'common/mail_menu' %>
+
+<% if current_user.has_role?('administrator') %>
+<% @menu_index = {'assignments' => 0, 'cvs' => 1, 'send_outs' => 2, 'users' => 3, 'datalists' => 4, 'invoices' => 5, 'reports' => 6, 'messages' => 7, 'cms' => 8, 'emails' => 9} %>
+<% else %>
+<% @menu_index = {'users' => 1, 'datalists' => 2, 'messages' => 3, 'cms' => 4, 'emails' => 5} %>
+<% end %>
+
+

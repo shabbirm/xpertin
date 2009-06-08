@@ -1,0 +1,336 @@
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.021191)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.015946)[0m   [0mCREATE TABLE `schema_info` (version int(11))[0m
+  [4;36;1mSQL (0.000418)[0m   [0;1mINSERT INTO `schema_info` (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: #42S01Table 'schema_info' already exists: CREATE TABLE `schema_info` (version int(11))[0m
+  [4;36;1mSQL (0.039206)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreatePages (1)
+  [4;35;1mSQL (0.123459)[0m   [0mCREATE TABLE `pages` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255) DEFAULT NULL, `body` text DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000382)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;35;1mSQL (0.000490)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateUsers (2)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: #42S02Unknown table 'users': DROP TABLE `users`[0m
+  [4;35;1mSQL (0.002994)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `crypted_password` varchar(40) DEFAULT NULL, `salt` varchar(40) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL, `remember_token` varchar(255) DEFAULT NULL, `remember_token_expires_at` datetime DEFAULT NULL, `activation_code` varchar(40) DEFAULT NULL, `activated_at` datetime DEFAULT NULL, `password_reset_code` varchar(40) DEFAULT NULL, `enabled` tinyint(1) DEFAULT 1) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000349)[0m   [0;1mUPDATE schema_info SET version = 2[0m
+  [4;35;1mSQL (0.000486)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateRoles (3)
+  [4;36;1mSQL (0.002752)[0m   [0;1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `rolename` varchar(255) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000346)[0m   [0mUPDATE schema_info SET version = 3[0m
+  [4;36;1mSQL (0.000481)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreatePermissions (4)
+  [4;35;1mSQL (0.003166)[0m   [0mCREATE TABLE `permissions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `role_id` int(11) NOT NULL, `user_id` int(11) NOT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mRole Columns (0.002120)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.000278)[0m   [0mBEGIN[0m
+  [4;36;1mRole Create (0.000489)[0m   [0;1mINSERT INTO `roles` (`updated_at`, `rolename`, `created_at`) VALUES('2008-09-26 08:16:20', 'administrator', '2008-09-26 08:16:20')[0m
+  [4;35;1mSQL (0.001234)[0m   [0mCOMMIT[0m
+  [4;36;1mUser Columns (0.003224)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.000252)[0m   [0mBEGIN[0m
+  [4;36;1mUser Create (0.000513)[0m   [0;1mINSERT INTO `users` (`salt`, `activated_at`, `updated_at`, `crypted_password`, `activation_code`, `remember_token_expires_at`, `enabled`, `password_reset_code`, `remember_token`, `login`, `created_at`, `email`) VALUES('21754250267f1a3a23f8220e2ebae64c7ede7daa', NULL, '2008-09-26 08:16:21', 'eeee2d8f6788e1853d8d7646052bf93e3168271b', '23e16f3c151778cb4ff36870b8570f6064fb84b4', NULL, 1, NULL, NULL, 'admin', '2008-09-26 08:16:21', 'info@yourapplication.com')[0m
+Sent mail:
+ Date: Fri, 26 Sep 2008 08:16:21 +0530
+From: mail@yourapplication.com
+To: info@yourapplication.com
+Subject: YourApplication - Please activate your new account
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Your account has been created.
+ 
+  Username: admin
+  Password: admin
+
+Visit this url to activate your account:
+
+  http://localhost:3000/activate/23e16f3c151778cb4ff36870b8570f6064fb84b4
+  [4;35;1mSQL (0.001450)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000194)[0m   [0;1mBEGIN[0m
+  [4;35;1mUser Update (0.041532)[0m   [0mUPDATE `users` SET `created_at` = '2008-09-26 08:16:21', `login` = 'admin', `crypted_password` = 'eeee2d8f6788e1853d8d7646052bf93e3168271b', `enabled` = 1, `activated_at` = '2008-09-26 02:46:21', `remember_token_expires_at` = NULL, `activation_code` = '23e16f3c151778cb4ff36870b8570f6064fb84b4', `salt` = '21754250267f1a3a23f8220e2ebae64c7ede7daa', `remember_token` = NULL, `email` = 'info@yourapplication.com', `password_reset_code` = NULL, `updated_at` = '2008-09-26 08:16:21' WHERE `id` = 1[0m
+Sent mail:
+ Date: Fri, 26 Sep 2008 08:16:21 +0530
+From: mail@yourapplication.com
+To: info@yourapplication.com
+Subject: YourApplication - Your account has been activated!
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+   admin, your account has been activated.  To visit the site, follow the link below:
+    
+   http://localhost:3000/
+
+  [4;36;1mSQL (0.004777)[0m   [0;1mCOMMIT[0m
+  [4;35;1mRole Load (0.000714)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`rolename` = 'administrator') LIMIT 1[0m
+  [4;36;1mUser Load (0.007080)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') LIMIT 1[0m
+  [4;35;1mPermission Columns (0.002072)[0m   [0mSHOW FIELDS FROM `permissions`[0m
+  [4;36;1mSQL (0.000249)[0m   [0;1mBEGIN[0m
+  [4;35;1mPermission Create (0.000451)[0m   [0mINSERT INTO `permissions` (`updated_at`, `role_id`, `user_id`, `created_at`) VALUES('2008-09-26 08:16:21', 1, 1, '2008-09-26 08:16:21')[0m
+  [4;36;1mSQL (0.000449)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000351)[0m   [0mUPDATE schema_info SET version = 4[0m
+  [4;36;1mSQL (0.000497)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateMailers (6)
+  [4;35;1mSQL (0.037000)[0m   [0mCREATE TABLE `mailers` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001000)[0m   [0;1mUPDATE schema_info SET version = 6[0m
+  [4;35;1mSQL (0.000941)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateRegions (8)
+  [4;36;1mSQL (0.002541)[0m   [0;1mCREATE TABLE `regions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `sequence` int(11) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000348)[0m   [0mUPDATE schema_info SET version = 8[0m
+  [4;36;1mSQL (0.000494)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateReligions (9)
+  [4;35;1mSQL (0.026252)[0m   [0mCREATE TABLE `religions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `enable` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000332)[0m   [0;1mUPDATE schema_info SET version = 9[0m
+  [4;35;1mSQL (0.000358)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateLocation (10)
+  [4;36;1mSQL (0.002253)[0m   [0;1mCREATE TABLE `locations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `region_id` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000264)[0m   [0mUPDATE schema_info SET version = 10[0m
+  [4;36;1mSQL (0.000339)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateIndustries (11)
+  [4;35;1mSQL (0.003798)[0m   [0mCREATE TABLE `industries` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `sequence` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000267)[0m   [0;1mUPDATE schema_info SET version = 11[0m
+  [4;35;1mSQL (0.000472)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateCountries (12)
+  [4;36;1mSQL (0.002620)[0m   [0;1mCREATE TABLE `countries` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `gcc` tinyint(1) DEFAULT NULL, `arab` tinyint(1) DEFAULT NULL, `english_speaking` tinyint(1) DEFAULT NULL, `asian` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.010372)[0m   [0mUPDATE schema_info SET version = 12[0m
+  [4;36;1mSQL (0.000879)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateMembers (14)
+  [4;35;1mSQL (0.003677)[0m   [0mCREATE TABLE `members` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `member_id` int(11) DEFAULT NULL, `name` varchar(30) NOT NULL, `email` varchar(255) DEFAULT NULL, `address` varchar(255) DEFAULT NULL, `login_name` varchar(255) DEFAULT NULL, `password` varchar(255) DEFAULT NULL, `fax` varchar(255) DEFAULT NULL, `country` varchar(255) DEFAULT NULL, `state` varchar(255) DEFAULT NULL, `phone` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT 1, `photo` blob(2097152) DEFAULT NULL, `thumbnail` blob(262144) DEFAULT NULL, `dob` date NOT NULL, `notes` text DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000272)[0m   [0;1mUPDATE schema_info SET version = 14[0m
+  [4;35;1mSQL (0.000352)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to AddColumnMembers (15)
+  [4;36;1mSQL (0.144336)[0m   [0;1mALTER TABLE `members` ADD `docs` blob(5242880)[0m
+  [4;35;1mSQL (0.000382)[0m   [0mUPDATE schema_info SET version = 15[0m
+  [4;36;1mSQL (0.000499)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateComputerSkillCategories (16)
+  [4;35;1mSQL (0.010395)[0m   [0mCREATE TABLE `computer_skill_categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `sequence` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000927)[0m   [0;1mUPDATE schema_info SET version = 16[0m
+  [4;35;1mSQL (0.000839)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateComputerSkills (17)
+  [4;36;1mSQL (0.013688)[0m   [0;1mCREATE TABLE `computer_skills` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `sequence` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT NULL, `computer_skill_categories_id` int(11) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000443)[0m   [0mUPDATE schema_info SET version = 17[0m
+  [4;36;1mSQL (0.000660)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateProfessionalQualifications (18)
+  [4;35;1mSQL (0.003715)[0m   [0mCREATE TABLE `professional_qualifications` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL, `sequence` int(11) DEFAULT NULL, `parent_id` int(11) DEFAULT NULL, `enabled` tinyint(1) DEFAULT NULL, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000457)[0m   [0;1mUPDATE schema_info SET version = 18[0m
+  [4;35;1mSQL (0.000575)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to AddColumnInPageTable (19)
+  [4;36;1mSQL (0.008768)[0m   [0;1mALTER TABLE `pages` ADD `name` varchar(255)[0m
+  [4;35;1mSQL (0.004731)[0m   [0mALTER TABLE `pages` ADD `parent_id` int(11)[0m
+  [4;36;1mSQL (0.066335)[0m   [0;1mALTER TABLE `pages` ADD `sequence` int(11)[0m
+  [4;35;1mSQL (0.004667)[0m   [0mALTER TABLE `pages` ADD `url` varchar(255)[0m
+  [4;36;1mSQL (0.000275)[0m   [0;1mUPDATE schema_info SET version = 19[0m
+  [4;35;1mSQL (0.000355)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateLocations (20)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: #42S01Table 'locations' already exists: CREATE TABLE `locations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime DEFAULT NULL, `updated_at` datetime DEFAULT NULL) ENGINE=InnoDB[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000161)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: #42S01Table 'schema_info' already exists: CREATE TABLE `schema_info` (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: #42S01Table 'schema_info' already exists: CREATE TABLE `schema_info` (version int(11))[0m
+  [4;35;1mSQL (0.000317)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000224)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000231)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000220)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000212)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000223)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000220)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000214)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000473)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000336)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000226)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000214)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000212)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000231)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000241)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000229)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000429)[0m   [0mSELECT * FROM schema_info[0m
+  [4;36;1mSQL (0.001019)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.001542)[0m   [0mSHOW FIELDS FROM `computer_skill_categories`[0m
+  [4;36;1mSQL (0.001406)[0m   [0;1mdescribe `computer_skill_categories`[0m
+  [4;35;1mSQL (0.001201)[0m   [0mSHOW KEYS FROM `computer_skill_categories`[0m
+  [4;36;1mSQL (0.001473)[0m   [0;1mSHOW FIELDS FROM `computer_skills`[0m
+  [4;35;1mSQL (0.001411)[0m   [0mdescribe `computer_skills`[0m
+  [4;36;1mSQL (0.001129)[0m   [0;1mSHOW KEYS FROM `computer_skills`[0m
+  [4;35;1mSQL (0.001512)[0m   [0mSHOW FIELDS FROM `countries`[0m
+  [4;36;1mSQL (0.001409)[0m   [0;1mdescribe `countries`[0m
+  [4;35;1mSQL (0.001161)[0m   [0mSHOW KEYS FROM `countries`[0m
+  [4;36;1mSQL (0.001400)[0m   [0;1mSHOW FIELDS FROM `industries`[0m
+  [4;35;1mSQL (0.001299)[0m   [0mdescribe `industries`[0m
+  [4;36;1mSQL (0.001145)[0m   [0;1mSHOW KEYS FROM `industries`[0m
+  [4;35;1mSQL (0.001416)[0m   [0mSHOW FIELDS FROM `locations`[0m
+  [4;36;1mSQL (0.001271)[0m   [0;1mdescribe `locations`[0m
+  [4;35;1mSQL (0.001118)[0m   [0mSHOW KEYS FROM `locations`[0m
+  [4;36;1mSQL (0.001135)[0m   [0;1mSHOW FIELDS FROM `mailers`[0m
+  [4;35;1mSQL (0.001057)[0m   [0mdescribe `mailers`[0m
+  [4;36;1mSQL (0.001122)[0m   [0;1mSHOW KEYS FROM `mailers`[0m
+  [4;35;1mSQL (0.002326)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.002277)[0m   [0;1mdescribe `members`[0m
+  [4;35;1mSQL (0.001237)[0m   [0mSHOW KEYS FROM `members`[0m
+  [4;36;1mSQL (0.001633)[0m   [0;1mSHOW FIELDS FROM `pages`[0m
+  [4;35;1mSQL (0.001504)[0m   [0mdescribe `pages`[0m
+  [4;36;1mSQL (0.001128)[0m   [0;1mSHOW KEYS FROM `pages`[0m
+  [4;35;1mSQL (0.001244)[0m   [0mSHOW FIELDS FROM `permissions`[0m
+  [4;36;1mSQL (0.001198)[0m   [0;1mdescribe `permissions`[0m
+  [4;35;1mSQL (0.001127)[0m   [0mSHOW KEYS FROM `permissions`[0m
+  [4;36;1mSQL (0.001440)[0m   [0;1mSHOW FIELDS FROM `professional_qualifications`[0m
+  [4;35;1mSQL (0.001364)[0m   [0mdescribe `professional_qualifications`[0m
+  [4;36;1mSQL (0.001161)[0m   [0;1mSHOW KEYS FROM `professional_qualifications`[0m
+  [4;35;1mSQL (0.001293)[0m   [0mSHOW FIELDS FROM `regions`[0m
+  [4;36;1mSQL (0.001204)[0m   [0;1mdescribe `regions`[0m
+  [4;35;1mSQL (0.001145)[0m   [0mSHOW KEYS FROM `regions`[0m
+  [4;36;1mSQL (0.001582)[0m   [0;1mSHOW FIELDS FROM `religions`[0m
+  [4;35;1mSQL (0.001234)[0m   [0mdescribe `religions`[0m
+  [4;36;1mSQL (0.001115)[0m   [0;1mSHOW KEYS FROM `religions`[0m
+  [4;35;1mSQL (0.001164)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.001132)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001109)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.001899)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.001792)[0m   [0mdescribe `users`[0m
+  [4;36;1mSQL (0.001153)[0m   [0;1mSHOW KEYS FROM `users`[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.025144)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000135)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.005109)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000197)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000203)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000144)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001446)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000225)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000207)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000328)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001431)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000195)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000154)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000123)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001378)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000196)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000154)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000115)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001406)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000187)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000155)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000122)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001343)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000182)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000177)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000121)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001371)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000180)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000155)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000123)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001358)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000175)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000155)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000124)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001374)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000189)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000157)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000123)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001376)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000186)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000148)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000119)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001384)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000180)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000150)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000120)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001362)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000189)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000150)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000112)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Columns (0.001354)[0m   [0;1mSHOW FIELDS FROM `locations`[0m
+  [4;35;1mSQL (0.000183)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000248)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000211)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001639)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000223)[0m   [0;1mBEGIN[0m
+  [4;35;1mLocation Columns (0.001447)[0m   [0mSHOW FIELDS FROM `locations`[0m
+  [4;36;1mSQL (0.010734)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000226)[0m   [0mBEGIN[0m
+  [4;36;1mMember Columns (0.002798)[0m   [0;1mSHOW FIELDS FROM `members`[0m
+  [4;35;1mSQL (0.000195)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000156)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001647)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000222)[0m   [0;1mBEGIN[0m
+  [4;35;1mLocation Columns (0.001440)[0m   [0mSHOW FIELDS FROM `locations`[0m
+  [4;36;1mSQL (0.000183)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000204)[0m   [0mBEGIN[0m
+  [4;36;1mMember Columns (0.002234)[0m   [0;1mSHOW FIELDS FROM `members`[0m
+  [4;35;1mSQL (0.000193)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000172)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001273)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000219)[0m   [0;1mBEGIN[0m
+  [4;35;1mLocation Columns (0.001341)[0m   [0mSHOW FIELDS FROM `locations`[0m
+  [4;36;1mSQL (0.000187)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000204)[0m   [0mBEGIN[0m
+  [4;36;1mMember Columns (0.002190)[0m   [0;1mSHOW FIELDS FROM `members`[0m
+  [4;35;1mSQL (0.000262)[0m   [0mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000148)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001293)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000223)[0m   [0;1mBEGIN[0m
+  [4;35;1mMember Columns (0.002225)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.000189)[0m   [0;1mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000770)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001347)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000284)[0m   [0;1mBEGIN[0m
+  [4;35;1mMember Columns (0.002629)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.000239)[0m   [0;1mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000152)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001291)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000216)[0m   [0;1mBEGIN[0m
+  [4;35;1mMember Columns (0.002235)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.000185)[0m   [0;1mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000149)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001275)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000224)[0m   [0;1mBEGIN[0m
+  [4;35;1mMember Columns (0.002225)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.000191)[0m   [0;1mROLLBACK[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000206)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+** ultrasphinx: configuration file not found for "test" environment
+** ultrasphinx: please run 'rake ultrasphinx:configure'
+** ultrasphinx: spelling support not available (raspell configuration raised "uninitialized constant Ultrasphinx::Spell::Aspell")
+  [4;35;1mMember Load (0.001276)[0m   [0mSELECT * FROM `members` ORDER BY created_at DESC LIMIT 0, 30[0m
+  [4;36;1mSQL (0.000236)[0m   [0;1mBEGIN[0m
+  [4;35;1mMember Columns (0.002226)[0m   [0mSHOW FIELDS FROM `members`[0m
+  [4;36;1mSQL (0.000197)[0m   [0;1mROLLBACK[0m

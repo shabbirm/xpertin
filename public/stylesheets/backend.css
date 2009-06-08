@@ -1,0 +1,539 @@
+@import 'common.css';
+/*  
+ AjaxScaffoldGenerator version 3.1.0
+ (c) 2006 Richard White <rrwhite@gmail.com>
+ 
+ AjaxScaffoldGenerator is freely distributable under the terms of an MIT-style license.
+ 
+ For details, see the AjaxScaffoldGenerator web site: http://www.ajaxscaffold.com/
+*/
+body {
+	margin:0px;
+}
+body, th, td {
+	font-family: arial, helvetica, verdana, sans-serif;
+	font-size: 12px;
+	margin:0px;
+}
+
+a {
+	/*color: navy; */
+}
+
+h1 {
+	color: gray;
+	border-bottom:1px solid red;
+}
+h2, h3 {
+	margin-top:5px;
+	margin-bottom:5px;
+	color: #333;
+	background-color: #E0E0E0;
+	padding: 2px;
+	font-size: 16px;
+}
+h2 {
+	font-size: 14px;
+}
+h3 {
+	font-size: 12px;
+}
+.ajax-scaffold h2 {
+	background-color: #833E43;/*#005cb8;*/
+}
+
+.highlight {
+	background-color: yellow;
+}
+
+label {
+	padding-right:5px;
+	/*font-weight:bold;*/
+}
+label.plain {
+	font-weight:plain;
+}
+#header {
+	background-color:#fff;
+	border-top: 10px solid #E0E0E0;
+}
+#header img {
+	margin-top:10px;
+}
+
+#footer {
+	padding: 2px;
+	padding-left:10px;
+	background-color:#E0E0E0;
+}
+
+#topNav {
+	background-color: Gray;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding: 2px;
+	height: 20px;
+	width: 99%;
+	color: #333;
+}
+#topNav ul {
+	list-style: none;
+	padding-left: 58%;
+	font-size: small;
+	margin: 0px;
+}
+#topNav li {
+	background-color: red;
+	height: 20px;
+	display: inline;
+	margin-right:2px;
+	margin-left:2px;
+	padding: 0px;
+	padding-right:15px;
+	padding-left:15px;
+	float: left;
+	color: white;
+}
+#topNav a {
+	text-decoration: underline;
+	color: white;
+}
+#topNav li.pressed {
+	background-color: navy;
+}
+#implementation li{
+	list-style: none;
+	color: navy;
+	font-size:15px;
+	text-decoration:none;
+}
+#topNav li.pressed a {
+	text-decoration: none;
+}
+#topNav li a:hover {
+	color: white;
+}
+#loggedInUser {
+	display: inline; 
+	float: right;
+	
+}
+#loggedInUser ul li {
+	margin-bottom: 10px;
+}
+#loggedInUser h1 {
+	margin-top:0px;
+}
+#submenu {
+	display: inline;
+	float: left;
+	width:150px;
+	background-color: #F0F0F0;
+	margin-right: 10px;
+	padding-top: 10px;
+	padding-right:0px;
+	border:1px solid silver;
+	font-size: small;
+	background-color: deepgray; /*#E6F2FF;*/
+}
+#submenu ul {
+	margin-left: 10px;
+	margin-bottom:0px;
+	padding: 10px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+#submenu ul li {
+	margin-bottom: 5px;
+}
+.listfilter {
+	padding-bottom:10px;
+	padding-top:10px;
+	padding-right:10px;
+	font-weight:bold;
+	margin-bottom: 10px;
+}
+#main {
+	clear: both;
+	margin-top:5px;
+	min-height: 600px;
+	_height: 600px;
+	background-color:#fff;
+	padding-right:10px;
+	padding-left:10px;
+}
+#mainContent ul li {
+	margin-bottom: 10px;
+}
+#mainContent h1 {
+	margin-top:0px;
+}
+img {border:0px;}
+
+.webForm th {
+	text-align: left;
+	padding: 5px;
+}
+.required {
+	background: url('../images/star.jpg') center right no-repeat;	
+	padding-right:10px;
+}
+.required label {
+	margin-right:10px;
+}
+.webForm .countryList {
+	width:200px;
+}
+.header {
+	background-color: #F0F0F0;
+	font-weight: bold;
+}
+ul li {
+	list-style: none;
+	list-style-image: url('../images/bullet.gif');
+}
+fieldset {
+	padding:5px;
+	margin-bottom:5px;
+	margin-top:5px;
+	border:1px dotted silver;
+}
+legend {
+	padding: 0px;
+	margin-left:0;
+	font-weight: bold;
+	color: #494949;
+	font-style: italic;
+	background-color: white;
+}
+fieldset.candidate_login_form {
+	width:50%;		
+}
+.fieldTip {
+	font-style: italic;
+}
+#actionMessage, #actionError {
+	margin-bottom:10px;
+}
+#actionMessage, .message {
+	color: #C00000;
+}
+#actionError, .error {	
+	color: #C00000;
+}
+#errorExplanation {
+	background: #fcc;
+	margin: 2px 7px;
+	border: solid 1px #f66;
+	padding: 5px;
+}
+.toolBar {
+	text-align :right;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+.toolBar a, a.action, #toolbar a, .mailToolbar a {
+	padding:2px 10px 2px 10px;
+	border: 1px solid silver;
+	background-color: #833E43;/* #005CB8;*/
+
+	color: white;
+	text-decoration: none;
+	font-size:11px;
+}
+div#submenu.adminmenu ul {
+	margin-top:3px;
+	margin-left:12px;
+}
+div#submenu.adminmenu ul li {
+	margin-bottom: 5px;
+}
+div.auto_complete {
+  position:absolute;
+  width:400px;
+  background-color:white;
+  border:1px solid #888;
+  margin:0px;
+  padding:0px;
+}
+div.auto_complete ul {
+	margin:5px;
+	padding: 5px;
+}
+div.auto_complete li {
+	list-style: none;
+	list-style-image: none;	
+	margin:0px;
+	padding: 0px;
+	margin-bottom:5px;
+}
+li.selected { background-color: #ffb; }
+#cover {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: silver;
+    opacity: .7;
+	/*filter: alpha(opacity=70);*/
+    z-index: 5;
+	margin:0px;
+}
+#modalWindow {
+    position: fixed;
+    top: 100px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    z-index: 10;
+    /*border:10px solid #E6F2FF;*/
+}
+#modalWindowContent {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	background-color:white;
+	border:10px solid deepgray;/*#E6F2FF;*/
+    padding: 10px;	
+}	
+#modalWindow .controls {
+	text-align:right;
+}
+.tooltip {
+	background-color: #833E43;/*#ffff87; */
+	border:1px solid silver;
+    padding:2px;
+	text-align: left;
+	width: 120px;
+	font-size:10px;
+}
+.tooltip ul {
+	padding:15px;
+	margin:0px;
+	padding-top:1px;
+}
+
+tr.critical td, .critical {
+	background-color: #fbb;
+}
+table.summaryList th {
+	background-color: #833E43; /*#B9DCFF; */
+	color: #000;
+}
+table.summaryList tr:hover, table.reportTable tr:hover {
+	background-color: #f0f0f0;
+}
+tr.seen_false td {
+	font-weight: bold;
+}
+#body .popup_main {
+	margin-top:80px;
+}
+.editCVLink, .smallLink {font-size:10px;color:#C00000}
+
+.mailToolbar {
+	text-align:center;
+	color: red;
+	text-decoration: none;
+}
+#flashChart {
+	margin-top:10px;
+	border:1px solid gray;
+}
+.reportTable th {
+	text-align:left;
+}
+.sortable thead th {
+	cursor: pointer;
+}
+.sortable thead th.sorttable_nosort {
+	cursor: auto;
+}
+.header {
+	background-color: #F0F0F0;
+	font-weight: bold;
+	padding:5px;
+}
+.webForm th {
+	text-align: left;
+	padding: 5px;
+	width: 25%;
+}
+.required {
+	background: url('../images/star.jpg') center right no-repeat;	
+	padding-right:20px;
+}
+.required label {
+	margin-right:10px;
+}
+.webForm .countryList {
+	width:200px;
+}
+#actionMessage, #actionError {
+	margin-bottom:10px;
+}
+#actionMessage, .message {
+	color: #C00000;
+}
+#actionError, .error {	
+	color: #C00000;
+}
+#errorExplanation {
+	background: #fcc;
+	margin: 2px 7px;
+	border: solid 1px #f66;
+	padding: 5px;
+	margin-bottom:10px;
+}
+#errorExplanation li {
+	margin: 0px;
+	padding: 0px 0px 0px 10px;
+	border-bottom: 0px;
+}
+.toolBar {
+	text-align :right;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+.toolBar a, a.action, #toolbar a {
+	padding:2px 10px 2px 10px;
+	border: 1px solid silver;
+	background-color: lightgray;
+	color: white;
+	text-decoration: none;
+	font-size:11px;
+}
+table.dataList {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom:4px;
+}
+table.dataList td, table.dataList th {
+	border:1px solid silver;
+	padding:5px;
+}
+table.dataList th {
+	background-color: gray;
+	color: white;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+table.dataList td {
+	border-bottom:1px solid #F0F0F0; 
+	padding-top:5px;
+	padding-bottom:5px;
+}
+table.bordered {
+	border-collapse: collapse;
+}
+table.bordered td, table.bordered th {
+	border:1px solid silver;
+}
+tr.odd td, tr.even th {
+	background-color: deepgray;
+}
+tr.even td, tr.even th {
+	background-color: #fff;
+}
+td.actionLinks {
+	text-align:center;
+}
+td.actionLinks a {
+	padding-left:2px;
+}
+.fieldWithErrors { display: inline; }
+.fieldWithErrors input, .fieldWithErrors textarea, .fieldWithErrors select {
+	border:1px solid red;
+}
+.roundBox{
+	background-color:  gray;/*#005CB8; */
+	padding-bottom: 5px;
+}
+ #loadingBox, .loading {
+	background-color: #c00000;
+	text-align:center;
+	color: white;
+	padding: 2px;
+	width:10%;
+	position:fixed;
+	/*
+_position:absolute;
+*/
+	left:90%;
+	top:0px;
+	/*
+_top:expression(eval(document.body.scrollTop));
+*/
+}
+table.details {
+	width:95%;
+}
+table.details th {
+	text-align:right;
+	vertical-align: top;
+	margin-top:10px;
+}
+table.details th, table.details td {
+	padding: 3px;
+}
+.button {
+	border:1px solid gray;
+	background-color: #F0F0F0;
+	padding:2px;
+	text-decoration: none;
+	padding-left:10px;
+	padding-right:10px;
+	margin-left:20px;
+}
+option.bold {
+	font-weight: bold;
+}
+
+#paginate div.hits {
+	width: 20%;
+	display: inline;
+	margin-right: 20px;
+}
+#paginate a {
+	margin-left:10px;
+}
+#paginate {
+	height:30px;
+	text-align:right;
+	margin-right: 10px;
+}
+table.details th {
+	background-color: #F0F0F0;
+	text-align: left;
+}
+table.webForm {
+	width:90%;
+	margin-left:0px;
+}
+.accordionTabTitleBar Hover {
+	font-size        : 11px;
+	background-color : yellow;/*#1f669b;*/
+	color            : #000000;
+}
+
+.accordionTabTitleBar {
+	background-color	: gray;
+	font-size           : 12px;
+	padding             : 4px 6px 4px 6px;
+	border-style        : solid none solid none;
+	border-top-color    : #BDC7E7;
+	border-bottom-color : #182052;
+	border-width        : 1px 0px 1px 0px;
+	width				:139px;
+	color				: #fff;
+}
+.accordionTabContentBox {
+	font-size        : 11px;
+	border-left: 0px;
+	border-top-width : 0px;
+	margin-left:-10px;
+	padding          : 0px; 
+
+} 

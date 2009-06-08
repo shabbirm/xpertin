@@ -1,0 +1,14 @@
+<% form_for :new_implementations, @region, :url => { :action => "add_regions_throught_javascript" } do |f| %>
+<table width="50%" align="center">
+	<tr><td colspan="2">Add the region through Javascript .for this code help you can see the application helper and application javascript file.</td></tr>
+	<tr><td width="25%">
+<%= f.select :region_id, (Region.find(:all).collect {|c| [c.name, c.id]}), :include_blank => true %>
+</td>
+<td>
+<%= prompt_to_remote('new Region','new Region', 'region[name]', 
+                     {:controller => 'regions', :action => 'add_region'},
+                  :tabindex => 199) %>
+</td></tr>
+</table>				  
+
+<% end %>   

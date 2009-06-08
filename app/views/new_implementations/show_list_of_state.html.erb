@@ -1,0 +1,8 @@
+
+<h1>This list of states are example of state_select plugins</h1>
+
+<% form_for :member, :url => {:controller=>'members', :action=>'show', :id=>params[:id]}, :html=>{:multipart =>'true'} do |f| %>
+
+<%= state_select(:member, :state, country='INDIA', options = {}, html_options = {}) %>
+
+<% end %>
